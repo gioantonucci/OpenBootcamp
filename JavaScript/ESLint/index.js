@@ -9,7 +9,7 @@
 // - Ejecuta el script a través del terminal
 
 let name = 'Giovanna'
-let lastName = "Antonucci"
+let lastName = 'Antonucci'
 let estudiante = `${name} ${lastName}`
 let estudianteMayus = estudiante.toUpperCase()
 console.log(estudianteMayus)
