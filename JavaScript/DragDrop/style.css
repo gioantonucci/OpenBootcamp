@@ -1,0 +1,19 @@
+h1 {
+    margin: 2rem;
+}
+
+.container {
+    background-color: rgb(129, 18, 129);
+    padding: 1rem;
+    margin: 2rem;
+}
+.parrafo {
+    background-color: rgb(195, 220, 241);
+    padding: 1rem;
+}
+
+.drop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
