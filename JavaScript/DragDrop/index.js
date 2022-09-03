@@ -5,7 +5,7 @@
 
 const parrafos = document.querySelectorAll(".parrafo")
 const secciones = document.querySelectorAll(".container")
-const tacho = document.querySelectorAll(".drop")
+const tacho = document.querySelector(".tacho")
 
 parrafos.forEach(p => {
     p.addEventListener('dragstart', e => {
@@ -34,4 +34,14 @@ secciones.forEach(s => {
         s.appendChild(parrafo)
         
     })
+})
+
+tacho.addEventListener('dragover', e => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'copy'
+})
+
+tacho.addEventListener('drop', e => {
+   const id_parrafo = e.dataTransfer.getData('id')
+   document.getElementById(id_parrafo).remove()
 })
