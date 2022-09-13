@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ClockFun = () => {
-  let initialState = {
+  const initialState = {
     fecha: new Date(),
     edad: 0,
     nombre: "Martín",
@@ -13,16 +13,17 @@ const ClockFun = () => {
  
   useEffect(() => {
     const timerID = setInterval(() => {
-        tick()
+        actualiza();
     }, 1000);
-    return () =>
+    return () => {
     clearInterval(timerID)
+    };
   });
 
-   const tick = () => {
+   const actualiza = () => {
     return setState({
-        fecha: state.fecha,
-        edad: state.edad,
+        fecha: new Date(),
+        edad: state.edad + 1,
         nombre: state.nombre,
         apellidos: state.apellidos
     })
