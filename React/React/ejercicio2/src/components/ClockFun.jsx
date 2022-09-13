@@ -10,21 +10,23 @@ const ClockFun = () => {
 
   const [state, setState] = useState(initialState);
 
-  function tick(){
-    this.setState((prevState) => {
-       let edad = prevState.edad +1;
-       return {
-          ...prevState,
-          fecha: new Date(),
-          edad
-       }
-    });
- }
-
+ 
   useEffect(() => {
-    let timerID = setInterval(() => tick(), 1000);
-    return clearInterval(timerID)
-  }, []);
+    const timerID = setInterval(() => {
+        tick()
+    }, 1000);
+    return () =>
+    clearInterval(timerID)
+  });
+
+   const tick = () => {
+    return setState({
+        fecha: state.fecha,
+        edad: state.edad,
+        nombre: state.nombre,
+        apellidos: state.apellidos
+    })
+  }
 
   return (
     <div>
