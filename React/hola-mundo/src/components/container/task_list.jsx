@@ -5,30 +5,73 @@ import TaskComponent from "../pure/task";
 import "../../styles/task.scss";
 import TaskForm from "../pure/forms/taskForm";
 const TaskListComponent = () => {
-  const defaultTask1 = new Task("Example1","Description1",true,LEVELS.NORMAL);
-  const defaultTask2 = new Task("Example2","Description2",false,LEVELS.URGENT);
-  const defaultTask3 = new Task("Example3","Description3", true,LEVELS.BLOCKING);
-
+  const defaultTask1 = new Task(
+    "Example1",
+    "Description1",
+    true,
+    LEVELS.NORMAL
+  );
+  const defaultTask2 = new Task(
+    "Example2",
+    "Description2",
+    false,
+    LEVELS.URGENT
+  );
+  const defaultTask3 = new Task(
+    "Example3",
+    "Description3",
+    true,
+    LEVELS.BLOCKING
+  );
 
   //Estado del componente
-  const [tasks, setTasks] = useState([defaultTask1, defaultTask2, defaultTask3]);
+  const [tasks, setTasks] = useState([
+    defaultTask1,
+    defaultTask2,
+    defaultTask3,
+  ]);
   const [loading, setLoading] = useState(true);
 
   //Control del ciclo de vida del componetne
   useEffect(() => {
-    console.log("Task State has beem modified");
+    //console.log("Task State has been modified");
     setLoading(false);
     return () => {
-      console.log("TaskList component is going to unmount...");
+      // console.log("TaskList component is going to unmount...");
     };
   }, [tasks]);
 
-  const changeCompleted = (id) => {
-    console.log("TODO: cambiar state de la tarea");
-  };
+  function completeTask(task) {
+    console.log("Complete this task: ", task);
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+
+    tempTask[index].completed = !tempTask[index].completed;
+
+    //actualizamos el estado del componente, esto actualiza la iteracion de las tareas en
+    //orden para mostrarlas actualizadas
+    setTasks(tempTask);
+  }
+
+  function removeTask(task) {
+    console.log("Delete this task: ", task);
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+
+    tempTask.splice(index, 1);
+
+    setTasks(tempTask);
+  }
+
+  function addTask(task) {
+    console.log("Add this task: ", task);
+    const tempTask = [...tasks];
+    tempTask.push(task);
+    setTasks(tempTask);
+  }
 
   return (
-    <div >
+    <div>
       <div className="col-12">
         <div className="card">
           {/**Card header (title) */}
@@ -52,16 +95,22 @@ const TaskListComponent = () => {
               </tr>
             </thead>
             <tbody>
-            {tasks.map((task, i) => {
-                return ( <TaskComponent key={i} task={task} />)
-               
-            })}
-       
+              {tasks.map((task, i) => {
+                return (
+                  <TaskComponent
+                    key={i}
+                    task={task}
+                    complete={completeTask}
+                    remove={removeTask}
+                    add={addTask}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
-        <TaskForm></TaskForm>
       </div>
+      <TaskForm add={addTask}></TaskForm>
     </div>
   );
 };
