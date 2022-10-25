@@ -1,24 +1,58 @@
 import "./App.css";
 
+import { useState } from 'react';
+
 function App() {
-  /*Un método para que cuando el ratón entre en el contenedor,
-  se dará un valor aleatorio (color RGB entre 0 y 255)
-  para cambiar el color del componente.
- */
+  const [color, setColor] = useState('#000000');
 
-  /*Un método para que cuando salga el ratón del componente se detenga
- por completo el cambio de color.
- */
+  const [manageInterval, setManageInterval] = useState(0);
+  const [doubleClick, setDoubleClick] = useState(0);
 
-  /*Por último, un método en el que cuando se pulsa dos veces en el componente, 
-   se tiene que detener el cambio de color.
- */
+  const getColor = () => Math.floor(Math.random() * 256);
+
+  const getHex = (red, green, blue) => {
+    return (
+      '#' +
+      [red, green, blue]
+        .map((c) => {
+          const hex = c.toString(16);
+          return hex.lenght === 1 ? '0' + hex : hex;
+        })
+        .join('')
+    );
+  };
+
+  const generateHex = () => {
+    const rgb = {
+      r: getColor(),
+      g: getColor(),
+      b: getColor(),
+    };
+    return setColor(getHex(rgb.r, rgb.g, rgb.b));
+  };
+
+  const onChangeColor = () => {
+    return setManageInterval(setInterval(generateHex, 500));
+  };
+
+  const onStopChangeColor = () => {
+    return clearInterval(manageInterval);
+  };
+
+  const onClickChangeColor = () => {
+    return clearInterval(manageInterval);
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div id="canvas"></div>
-      </header>
+    <div className="App" style={{ margin: 'auto' }}>
+      <div
+        id="square"
+        onMouseOver={onChangeColor}
+        onMouseLeave={onStopChangeColor}
+        onDoubleClick={onClickChangeColor}
+        style={{ width: '255px', height: '255px', backgroundColor: color, margin: 'auto' }}
+      ></div>{' '}
+      <p style={{ color: 'black' }}>Color: {color} </p>
     </div>
   );
 }
