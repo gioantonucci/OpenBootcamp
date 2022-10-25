@@ -46,7 +46,6 @@ function TaskComponent({ task, complete, remove }) {
           className="bi-toggle-on task-action"
           style={{
             color: "green",
-      
           }}
         ></i>
       );
@@ -57,15 +56,27 @@ function TaskComponent({ task, complete, remove }) {
           className="bi-toggle-off task-action"
           style={{
             color: "grey",
-      
           }}
         ></i>
       );
     }
   }
 
+  const taskCompleted = {
+    color: "grey",
+    textDecoration: "line-through",
+    fontWeight: "bold",
+  };
+  const taskPending = {
+    color: "tomato",
+    fontWeight: "bold",
+  };
+
   return (
-    <tr className="fw-normal">
+    <tr
+      className="fw-normal"
+      style={task.completed ? taskCompleted : taskPending}
+    >
       <th>
         <span className="">{task.name}</span>
       </th>
@@ -91,8 +102,8 @@ function TaskComponent({ task, complete, remove }) {
 
 TaskComponent.propTypes = {
   task: PropTypes.instanceOf(Task).isRequired,
-  complete: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired
+  completed: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;

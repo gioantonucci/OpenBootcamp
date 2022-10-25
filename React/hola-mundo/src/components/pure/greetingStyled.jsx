@@ -4,12 +4,15 @@ import React, { useState } from "react";
 
 // ? Estilo para usuario logueado
 const loggedStyle = {
-  color: "blue",
+  backgroundColor: 'green',
+  color: "white",
+  fontWeight: "bold"
 };
 // ? Estilo para usuario no logueado
 const unloggedStyle = {
-  color: "red",
-  fontWeight: "bold",
+  backgroundColor: 'tomato',
+  color: "white",
+  fontWeight: "bold"
 };
 
 const GreetingStyled = (props) => {

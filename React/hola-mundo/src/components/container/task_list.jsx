@@ -54,20 +54,57 @@ const TaskListComponent = () => {
   }
 
   function removeTask(task) {
-    console.log("Delete this task: ", task);
     const index = tasks.indexOf(task);
     const tempTask = [...tasks];
-
     tempTask.splice(index, 1);
-
     setTasks(tempTask);
   }
 
   function addTask(task) {
-    console.log("Add this task: ", task);
     const tempTask = [...tasks];
     tempTask.push(task);
     setTasks(tempTask);
+  }
+
+  const Table = () => {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task, i) => {
+            return (
+              <TaskComponent
+                key={i}
+                task={task}
+                complete={completeTask}
+                remove={removeTask}
+                add={addTask}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  };
+
+  let tasksTable;
+
+  if (tasks.length > 0) {
+    tasksTable = <Table />;
+  } else {
+    tasksTable = (
+      <div>
+        <h3>There aren't pending tasks! 🙂</h3>
+        <h4>Create one!</h4>
+      </div>
+    );
   }
 
   return (
@@ -85,29 +122,7 @@ const TaskListComponent = () => {
           data-mbd-perfect-scrollbar="true"
           style={{ position: "relative", height: "400px" }}
         >
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map((task, i) => {
-                return (
-                  <TaskComponent
-                    key={i}
-                    task={task}
-                    complete={completeTask}
-                    remove={removeTask}
-                    add={addTask}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+          {tasksTable}
         </div>
       </div>
       <TaskForm add={addTask}></TaskForm>
