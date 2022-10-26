@@ -6,9 +6,8 @@ import RegisterFormik from "./components/pure/forms/registerFormik";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <TaskListComponent />
-    <RegisterFormik></RegisterFormik>
     </div>
   );
 }
