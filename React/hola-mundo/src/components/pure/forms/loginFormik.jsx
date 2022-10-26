@@ -27,6 +27,7 @@ function LoginFormik() {
           alert(JSON.stringify(values, null, 2));
           //Guardamos los datos de registro en el local storage
           localStorage.setItem("credentials", values);
+    
         }}
       >
         {({
@@ -60,7 +61,7 @@ function LoginFormik() {
             {errors.password && touched.password && (
               <ErrorMessage name="password" component="div" />
             )}
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
             {isSubmitting ? <p>Login your credentials...</p> : null}
           </Form>
         )}
