@@ -4,6 +4,7 @@ import { Task } from "../../models/task.class";
 import TaskComponent from "../pure/task";
 import "../../styles/task.scss";
 import TaskForm from "../pure/forms/taskForm";
+import GoToHome from "../utils/GoToHome";
 const TaskListComponent = () => {
   const defaultTask1 = new Task(
     "Example1",
@@ -35,9 +36,9 @@ const TaskListComponent = () => {
   //Control del ciclo de vida del componetne
   useEffect(() => {
     //console.log("Task State has been modified");
-    setTimeout(() =>{
-    setLoading(false);
-  }, 2000 )
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     return () => {
       // console.log("TaskList component is going to unmount...");
@@ -71,29 +72,32 @@ const TaskListComponent = () => {
 
   const Table = () => {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((task, i) => {
-            return (
-              <TaskComponent
-                key={i}
-                task={task}
-                complete={completeTask}
-                remove={removeTask}
-                add={addTask}
-              />
-            );
-          })}
-        </tbody>
-      </table>
+      <div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task, i) => {
+              return (
+                <TaskComponent
+                  key={i}
+                  task={task}
+                  complete={completeTask}
+                  remove={removeTask}
+                  add={addTask}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     );
   };
 
@@ -111,10 +115,10 @@ const TaskListComponent = () => {
   }
 
   const loadingStyle = {
-    color: 'grey',
-    fontSize: '30px',
-    fontWeight: 'bold'
-  }
+    color: "grey",
+    fontSize: "30px",
+    fontWeight: "bold",
+  };
 
   return (
     <div>
@@ -131,10 +135,11 @@ const TaskListComponent = () => {
           data-mbd-perfect-scrollbar="true"
           style={{ position: "relative", height: "400px" }}
         >
-          {loading ? (<p style={loadingStyle}>Loading tasks...</p>) : tasksTable}
+          {loading ? <p style={loadingStyle}>Loading tasks...</p> : tasksTable}
         </div>
       </div>
       <TaskForm add={addTask} length={tasks.length}></TaskForm>
+      <GoToHome></GoToHome>
     </div>
   );
 };

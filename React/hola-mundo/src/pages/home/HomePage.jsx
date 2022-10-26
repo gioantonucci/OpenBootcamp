@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import DashBoard from "../dashboard/DashBoard";
 
 function HomePage() {
   
@@ -8,7 +9,7 @@ function HomePage() {
   return (
     <div>
       <h1>Home Page</h1>
-      <h2>Dashboard</h2>
+      <h2><DashBoard/></h2>
       <button onClick={() => navigate("/profile")}>Go to profile</button>
     </div>
   );
