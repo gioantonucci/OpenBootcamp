@@ -1,13 +1,17 @@
-import React from 'react';
-import GoToHome from '../../components/utils/GoToHome';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import GoToHome from "../../components/utils/GoToHome";
 
-const ProfilePage = ({user}) => {
-    return (
-        <div>
-            User profile
-            <GoToHome/>
-        </div>
-    );
-}
+const ProfilePage = ({ user }) => {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <h1>User profile</h1>
+      <button onClick={() => navigate("/tasks")}>Tasks</button>
+      <GoToHome />
+    </div>
+  );
+};
 
 export default ProfilePage;
