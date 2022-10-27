@@ -12,7 +12,7 @@ const DashBoard = () => {
     return (
         <div>
             <Button variant='contained' onClick={logout}>Logout</Button>
-            <MenuListItems/>
+           
             <Copyright/>
         </div>
     );
